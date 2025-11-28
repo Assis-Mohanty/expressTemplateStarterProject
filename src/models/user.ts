@@ -18,6 +18,7 @@ export class User extends Model<
   declare withdrawableBalance: CreationOptional<number>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+  declare deletedAt: CreationOptional<Date>;
 }
 
 export default function initUserModel(sequelize: Sequelize) {
@@ -52,6 +53,10 @@ export default function initUserModel(sequelize: Sequelize) {
       updatedAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
       }
     },
     {

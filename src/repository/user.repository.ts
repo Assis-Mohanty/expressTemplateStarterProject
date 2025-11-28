@@ -13,3 +13,17 @@ export async function getAllUsers(){
     const users=await User.findAll()
     return users
 }
+
+export async function deleteUser(id:number){
+    const result=await User.destroy({where:{id}})
+    return result
+}
+
+export async function updateUser(id:number,updateBody:Partial<UserDTO>){
+    const user=await User.findByPk(id);
+    if(!user){
+        return null;
+    }
+    const updatedUser=await user.update(updateBody);
+    return updatedUser;
+}
