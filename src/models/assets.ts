@@ -26,7 +26,6 @@ export class Asset extends Model<
     declare totalEarnings: CreationOptional<number>;
     declare usageCount: CreationOptional<number>;
 }
-
 Asset.init(
     {
         id: {

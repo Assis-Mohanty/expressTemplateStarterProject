@@ -28,3 +28,13 @@ export async function updateUserService(id:number,updateBody:Partial<UserDTO>) {
     const updatedUser=await updateUser(id,updateBody);
     return updatedUser;
 }
+
+export async function addMoneyBalance(money:number,id:number) {
+    const user=await getUser(id);
+    if(!user){
+        return null;
+    }
+    user.walletBalance += money;
+    await user.save();
+    return user;
+}

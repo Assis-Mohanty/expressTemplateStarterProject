@@ -5,6 +5,7 @@ export type PurchaseDTO={
     userId:number
     assetId:number
     type:PurchaseType
-    amountPaid:number
-    royaltyPaid:number
+    amountPaid?:number
+    royaltyPaid?:number
+    
 }

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import {
+    addMoneyBalance,
   createUserService,
   deleteUserService,
   getAllUsersService,
@@ -106,6 +107,40 @@ export async function updateUserHandler(
 
         res.status(200).json({
             message: "updated user successfully",
+            success: true,
+            data: updatedUser
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+export async function addMoneyBalanceHandler(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const id = Number(req.params.id);
+        const money = Number(req.body.money);
+
+        // Validate that ID is a valid positive integer
+        if (isNaN(id) || id <= 0 || !Number.isInteger(id)) {
+            throw new BadRequestError("Invalid user ID");
+        }
+
+        // Validate that money is a valid number and greater than 0
+        if (isNaN(money) || money <= 0) {
+            throw new BadRequestError("Invalid amount of money");
+        }
+
+        const updatedUser = await addMoneyBalance(money, id);
+
+        if (!updatedUser) {
+            throw new NotFoundError("User not found");
+        }
+
+        res.status(200).json({
+            message: "added money balance successfully",
             success: true,
             data: updatedUser
         });

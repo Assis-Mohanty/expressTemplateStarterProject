@@ -22,8 +22,8 @@ export class Purchase extends Model<
     declare assetId: number;
     declare buyerId: number;
     declare type: PurchaseType;
-    declare amountPaid: number;
-    declare royaltyPaid: number;
+    declare amountPaid: CreationOptional<number>;
+    declare royaltyPaid: CreationOptional<number>;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
     declare deletedAt: CreationOptional<Date>;
